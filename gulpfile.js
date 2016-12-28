@@ -1,8 +1,6 @@
 "use strict";
 
 const gulp = require('gulp');
-const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
 const sourcemaps = require('gulp-sourcemaps');
 const gutil = require("gulp-util");
 const webpack = require("webpack");
@@ -21,22 +19,21 @@ gulp.task('webpack', ['build-exjs'], () => {
   webpackConfig.entry = entry;
 
   return gulp.src(entry)
-    .pipe(sourcemaps.init())
-    .pipe(stream(webpackConfig))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('dist'));
+             .pipe(sourcemaps.init())
+             .pipe(stream(webpackConfig))
+             .pipe(sourcemaps.write())
+             .pipe(gulp.dest('dist'));
 });
 
 gulp.task("webpack-dev-server", (callback) => {
   let config = Object.create(webpackConfig);
   config.devtool = "eval";
-  config.debug = true;
   config.devServer = {
     contentBase: './dist'
   };
-  config.module.loaders.push({
+  config.module.rules.push({
     test: /\.html$/,
-    loader: "raw-loader"
+    use: "raw-loader"
   });
 
   return new WebpackDevServer(webpack(config), {

@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   cache: true,
-  entry: ['babel-polyfill', './app/tmp/app/Elixir.App.js'],
+  entry: ['./app/tmp/app/Elixir.App.js'],
   output: {
     path: path.join(__dirname, "dist"),
     filename: 'build.min.js'
@@ -15,21 +15,20 @@ module.exports = {
         warnings: false
       }
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new HtmlWebpackPlugin({
       template: './app/html/index.html'
     }),
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel'
+        use: 'babel-loader'
       },
       {
         test: /\.css$/,
-        loaders: ["style", "css"]
+        use: ["style-loader", "css-loader"]
       }
     ]
   }
