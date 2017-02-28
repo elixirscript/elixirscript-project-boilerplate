@@ -2,27 +2,23 @@
   "name": "elixirscript-project-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "gulpfile.js",
   "scripts": {
-    "build": "gulp webpack",
-    "server": "gulp",
+    "build": "webpack",
+    "server": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
-    "devDependencies": {
-      "babel-core": "6.21.0 ",
-      "babel-preset-env": "1.1.4",
-      "babel-loader": "^6.2.10",
-      "css-loader": "^0.26.1",
-      "gulp": "^3.9.1",
-      "gulp-sourcemaps": "^1.6.0",
-      "gulp-util": "^3.0.7",
-      "html-webpack-plugin": "^2.24.1",
-      "raw-loader": "^0.5.1",
-      "style-loader": "^0.13.1",
-      "webpack": "^2.2.0-rc.3",
-      "webpack-dev-server": "^2.2.0-rc.0",
-      "webpack-stream": "^3.2.0"
+  "devDependencies": {
+    "babel-core": "6.21.0 ",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "1.1.4",
+    "css-loader": "^0.26.1",
+    "elixirscript-loader": "^0.1.0",
+    "html-webpack-plugin": "^2.24.1",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.13.1",
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.4.1"
   }
 }

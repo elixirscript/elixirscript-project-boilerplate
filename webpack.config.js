@@ -1,35 +1,43 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   cache: true,
-  entry: ['./app/tmp/app/Elixir.App.js'],
+  entry: ["./app/javascript/index.js"],
   output: {
     path: path.join(__dirname, "dist"),
-    filename: 'build.min.js'
+    filename: "build.min.js"
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      }
-    }),
     new HtmlWebpackPlugin({
-      template: './app/html/index.html'
-    }),
+      template: "./app/html/index.html"
+    })
   ],
   module: {
     rules: [
       {
+        test: /\.ex$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: "elixirscript-loader",
+        options: {
+          inputFolder: "./app/elixirscript"
+        }
+      },
+      {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
-        use: 'babel-loader'
+        loader: "babel-loader"
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        loader: ["style-loader", "css-loader"]
       }
     ]
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    port: 8080
   }
 };
